@@ -11,3 +11,6 @@
 2. 隨機從kinmen_randomPoint.csv取得2點，若2點間直線距離大於1公里，則使用 Google Maps API 執行路徑導航。重覆執行至取得1萬筆資料，R 程式碼檔為 RandoomTripV3.R。
 3. 清理資料，從導航結果中取出路名，並建立路到路的關係。R 程式碼檔為 RoadNetwork.R。
 4. 進行網絡分析並視覺化。R 程式碼檔為 RoadNetworkAnalysis.R。
+
+## 結果
+![網絡圖](https://github.com/chiahuaw/RoadNetwork/blob/master/result_plot.png)
