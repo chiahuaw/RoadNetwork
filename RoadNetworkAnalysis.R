@@ -28,7 +28,7 @@ g = simplify(net, edge.attr.comb=list(Weight="sum","ignore"))
 
 pal3 <- brewer.pal(3, "Set3")
 
-g.size = log(betweenness(g)/transitivity(g))*1.5
+g.size = log((betweenness(g)*transitivity(g, type="local")))*1.5
 g.size = ifelse(is.na(g.size),1,g.size)
 g.size = abs(g.size)
 g.size = ifelse(is.infinite(g.size),1,g.size)
@@ -43,3 +43,22 @@ ggraph(g,layout = 'igraph', algorithm = 'fr') + #graphopt fr kk
   geom_node_text(aes(label = ifelse(betweenness(g)>=quantile(betweenness(g),0.80)[[1]],name,"")),size=2) +                   # "name" is automatically generated from the node IDs in the edges
   theme_void()+
   ggtitle("金門縣道路路網關係圖")
+
+#整體描述
+length(V(g)) #nodes數量
+length(E(g)) #edges數量
+graph.density(g) #密度
+clusters(g)$no #cluster數（就是大小金門）
+transitivity(g,type = "global") #全局係數
+diameter(g) #直徑
+degree.distribution(g) #nodes的度數 
+
+#兩點間關係
+shortest.paths(g) #最短路徑數量表
+
+#單點
+degree(g) %>% as.data.frame() %>% data.frame(road=row.names(.),degree=.) %>% arrange((desc(.))) #nodes度數
+closeness(g)%>% as.data.frame() %>% data.frame(road=row.names(.),closeness=.) %>% arrange((desc(.))) #nodes最短路徑節點密度
+betweenness(g)%>% as.data.frame() %>% data.frame(road=row.names(.),betweenness=.) %>% arrange((desc(.))) #nodes最短路徑的中間性
+transitivity(g, type="local")#傳遞度數
+evcent(g)$vector%>% as.data.frame() %>% data.frame(road=row.names(.),betweenness=.) %>% arrange((desc(.))) #特徵向量中心點
