@@ -14,4 +14,4 @@
 
 ## 結果
 ![網絡圖](https://github.com/chiahuaw/RoadNetwork/blob/master/result_plot.png)
-只顯示前20%道路的路名。
+只顯示前20%道路的路名。nodes 119 個，edges 有 378 個。
